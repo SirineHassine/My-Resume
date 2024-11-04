@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Root project element with namespace and schema declaration -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  
+  <!-- Model version of the POM -->
+  <modelVersion>4.0.0</modelVersion>
+
+  <!-- Project's unique identifiers -->
+  <groupId>fr.myresume</groupId> <!-- The group ID for the project -->
+  <artifactId>SpringMVC-art</artifactId> <!-- The artifact ID for the project -->
+  <version>0.0.1-SNAPSHOT</version> <!-- Project version, with SNAPSHOT for in-progress development -->
+  <packaging>war</packaging> <!-- Specifies the packaging type, 'war' for a web application archive -->
+
+  <!-- Project name and URL placeholder -->
+  <name>SpringMVC Maven Webapp</name>
+  <!-- URL of the project site, should be updated to actual site -->
+  <url>http://www.example.com</url> <!-- FIXME change it to the project's website -->
+
+  <!-- Define properties for source encoding and Java version for compilation -->
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.8</maven.compiler.source> <!-- Java version 1.8 for source -->
+    <maven.compiler.target>1.8</maven.compiler.target> <!-- Java version 1.8 for target -->
+  </properties>
+
+  <!-- Dependencies required for the project -->
+  <dependencies>
+    <!-- JUnit for unit testing -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- Spring MVC dependency -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webmvc</artifactId>
+      <version>5.3.10</version>
+    </dependency>
+    
+    <!-- Spring ORM for integration with persistence frameworks -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-orm</artifactId>
+      <version>5.3.3</version>
+    </dependency>
+
+    <!-- Hibernate Core for ORM functionality -->
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <version>5.4.2.Final</version>
+    </dependency>
+
+    <!-- MySQL Connector for connecting to MySQL databases -->
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>5.1.6</version>
+    </dependency>
+
+    <!-- Mockito for mocking in tests -->
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>1.9.5</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- Spring Test for testing Spring applications -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+      <version>5.3.10</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- JUnit for testing (an additional version) -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.10</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- Servlet API for building web applications -->
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>3.1.0</version>
+    </dependency>
+
+    <!-- JSP API for JSP support in the application -->
+    <dependency>
+      <groupId>javax.servlet.jsp</groupId>
+      <artifactId>javax.servlet.jsp-api</artifactId>
+      <version>2.3.1</version>
+    </dependency>
+
+    <!-- JSTL for JSP Tag Libraries -->
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>jstl</artifactId>
+      <version>1.2</version>
+    </dependency>
+
+    <!-- Lombok for reducing boilerplate code in Java classes -->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.16</version>
+      <scope>provided</scope> <!-- Provided scope for compile-time only -->
+    </dependency>
+
+    <!-- Gson for JSON serialization and deserialization -->
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.8.5</version>
+    </dependency>
+  </dependencies>
+
+  <!-- Build settings and plugins for the project -->
+  <build>
+    <finalName>SpringMVC</finalName> <!-- Final name for the generated WAR file -->
+
+    <!-- Plugin management section to specify plugin versions -->
+    <pluginManagement>
+      <plugins>
+        <!-- Clean plugin to clean the build directory -->
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.0.0</version>
+        </plugin>
+        
+        <!-- Resources plugin for resource handling -->
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.0.2</version>
+        </plugin>
+        
+        <!-- Compiler plugin to set Java version -->
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.7.0</version>
+        </plugin>
+        
+        <!-- WAR plugin to build WAR package -->
+        <plugin>
+          <artifactId>maven-war-plugin</artifactId>
+          <version>3.2.0</version>
+        </plugin>
+        
+        <!-- Install plugin for installing built artifacts to local repository -->
+        <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>2.5.2</version>
+        </plugin>
+        
+        <!-- Deploy plugin for deploying artifacts to a remote repository -->
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>2.8.2</version>
+        </plugin>
+        
+        <!-- JaCoCo plugin for code coverage reports -->
+        <plugin>
+          <groupId>org.jacoco</groupId>
+          <artifactId>jacoco-maven-plugin</artifactId>
+          <version>0.8.4</version>
+          <executions>
+            <!-- Initialize JaCoCo before running tests -->
+            <execution>
+              <id>jacoco-initialize</id>
+              <phase>process-resources</phase>
+              <goals>
+                <goal>prepare-agent</goal>
+              </goals>
+            </execution>
+            <!-- Generate a report after tests run -->
+            <execution>
+              <id>jacoco-site</id>
+              <phase>post-integration-test</phase>
+              <goals>
+                <goal>report</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+</project>
