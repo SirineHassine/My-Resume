@@ -6,4 +6,4 @@ ENV MYSQL_ROOT_PASSWORD="myresumepass"
 ENV MYSQL_DATABASE="myresume"
 
 
-ADD db_backup.sql docker-entrypoint-initdb.d/db_backup.sql
+COPY db_backup.sql docker-entrypoint-initdb.d/db_backup.sql
