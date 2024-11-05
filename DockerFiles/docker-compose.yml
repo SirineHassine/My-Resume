@@ -9,7 +9,7 @@ services:
     volumes:
       - myresumedbdata:/var/lib/mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=vprodbpass
+      - MYSQL_ROOT_PASSWORD=myresumepass
 
   myresumeapp:
     build:
