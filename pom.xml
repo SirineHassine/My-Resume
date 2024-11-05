@@ -126,7 +126,7 @@
 
   <!-- Build settings and plugins for the project -->
   <build>
-    <finalName>SpringMVC</finalName> <!-- Final name for the generated WAR file -->
+    <finalName>MyResume</finalName> <!-- Final name for the generated WAR file -->
 
     <!-- Plugin management section to specify plugin versions -->
     <pluginManagement>

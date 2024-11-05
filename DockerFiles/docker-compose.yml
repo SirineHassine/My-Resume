@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  vprodb:
+    image: sirinehassine/myresumedb
+    ports:
+      - "3306:3306"
+    volumes:
+      - vprodbdata:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=vprodbpass
+
+  vproapp:
+    image: sirinehassine/myresumeapp
+    ports:
+      - "8080:8080"
+    volumes: 
+      - vproappdata:/usr/local/tomcat/webapps
+
+  vproweb:
+    image: sirinehassine/myresumeweb
+    ports:
+      - "80:80"
+volumes:
+  vprodbdata: {}
+  vproappdata: {}
