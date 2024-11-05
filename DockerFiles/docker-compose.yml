@@ -27,22 +27,3 @@ services:
 volumes:
   myresumedbdata: {}
   myresumeappdata: {}
-
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-DockerFiles/docker-compose.yml[+] [dos] (13:56 05/11/2024)                                                                            5,10 All
--- INSERT --
-
