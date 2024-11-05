@@ -1,25 +1,48 @@
 version: '3.8'
 services:
-  vprodb:
-    image: sirinehassine/myresumedb
-    ports:
+  myresumedb:
+    build:
+      context: ./db
+      #image: sirinehassine/myresumedb
+    ports
       - "3306:3306"
     volumes:
-      - vprodbdata:/var/lib/mysql
-    environment:
-      - MYSQL_ROOT_PASSWORD=myresumepass
+      - myresumedbdata:/var/lib/mysql
 
-  vproapp:
-    image: sirinehassine/myresumeapp
+  myresumeapp:
+    build:
+      context: ./app
+    #image: sirinehassine/myresumeapp
     ports:
       - "8080:8080"
-    volumes: 
-      - vproappdata:/usr/local/tomcat/webapps
+    volumes:
+      - myresumeappdata:/usr/local/tomcat/webapps
 
-  vproweb:
-    image: sirinehassine/myresumeweb
+  myresumeweb:
+    build:
+      context: ./web
+      #image: sirinehassine/myresumeweb
     ports:
       - "80:80"
 volumes:
-  vprodbdata: {}
-  vproappdata: {}
+  myresumedbdata: {}
+  myresumeappdata: {}
+
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+DockerFiles/docker-compose.yml[+] [dos] (13:56 05/11/2024)                                                                            5,10 All
+-- INSERT --
+
