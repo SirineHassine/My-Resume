@@ -20,7 +20,7 @@ services:
     volumes:
       - myresumeappdata:/usr/local/tomcat/webapps
     depends_on:
-      - myresumefb
+      - myresumedb
 
   myresumeweb:
     build:
