@@ -4,7 +4,7 @@ services:
     build:
       context: ./db
       #image: sirinehassine/myresumedb
-    ports
+    ports:
       - "3306:3306"
     volumes:
       - myresumedbdata:/var/lib/mysql
