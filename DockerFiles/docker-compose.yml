@@ -19,6 +19,8 @@ services:
       - "8080:8080"
     volumes:
       - myresumeappdata:/usr/local/tomcat/webapps
+    depends_on:
+      - myresumefb
 
   myresumeweb:
     build:
