@@ -1,6 +1,6 @@
 FROM mysql:8.0.33
 LABEL "Project"="MyResume"
-LABEL "Author"="Imran"
+LABEL "Author"="Sirine"
 
 ENV MYSQL_ROOT_PASSWORD="myresumepass"
 ENV MYSQL_DATABASE="myresume"
