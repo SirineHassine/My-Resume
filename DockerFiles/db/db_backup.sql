@@ -7,5 +7,5 @@ CREATE TABLE `message` (
 `LastName` varchar(255),
 `Message` varchar(255),
 PRIMARY KEY(`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf-8;
+);
 
