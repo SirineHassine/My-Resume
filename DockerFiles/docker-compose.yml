@@ -13,7 +13,7 @@ services:
       - MYSQL_ROOT_PASSWORD=myresumepass
     healthcheck:
       test: ["CMD", "mysql", "-u", "root", "-pmyresumepass", "--execute", "SHOW DATABASES;"]
-      interval: 3s
+      interval: 10s
       retries: 5
       timeout: 5s
 
