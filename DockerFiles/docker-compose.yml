@@ -19,6 +19,7 @@ services:
       timeout: 5s
 
   myresumeapp:
+    container_name: myresumeapp
     build:
       context: ./app
     #image: sirinehassine/myresumeapp
@@ -36,6 +37,7 @@ services:
         condition: service_healthy
     
   myresumeweb:
+    container_name: myresumeweb
     build:
       context: ./web
       #image: sirinehassine/myresumeweb
