@@ -30,6 +30,7 @@ services:
       MYSQL_HOST: myresumedb
       MYSQL_USER: root
       MYSQL_PASSWORD: myresumepass
+      TZ: Europe/Paris
     depends_on:
       myresumedb:
         condition: service_healthy
