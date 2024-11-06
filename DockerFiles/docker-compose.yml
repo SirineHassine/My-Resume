@@ -36,7 +36,7 @@ services:
       myresumedb:
         condition: service_healthy
     healthcheck:
-        test: ["curl", "http://myresumeapp:8080"]
+        test: ["CMD", "curl", "http://myresumeapp:8080"]
         interval: 10s
         retries: 5
         timeout: 5s
