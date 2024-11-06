@@ -10,7 +10,8 @@ services:
     volumes:
       - myresumedbdata:/var/lib/mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=myresumepass
+        MYSQL_ROOT_PASSWORD: myresumepass
+        TZ: Europe/Paris
     healthcheck:
       test: ["CMD", "mysql", "-u", "root", "-pmyresumepass", "--execute", "SHOW DATABASES;"]
       interval: 10s
