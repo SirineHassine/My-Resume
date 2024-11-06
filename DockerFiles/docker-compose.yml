@@ -35,6 +35,11 @@ services:
     depends_on:
       myresumedb:
         condition: service_healthy
+    healthcheck:
+        test: ["curl", "http://myresumeapp:8080"]
+        interval: 10s
+        retries: 5
+        timeout: 5s
     
   myresumeweb:
     container_name: myresumeweb
@@ -42,7 +47,8 @@ services:
       context: ./web
       #image: sirinehassine/myresumeweb
     depends_on: 
-      - myresumeapp
+      myresumeapp:
+            condition: service_healthy
     ports:
       - "80:80"
 volumes:
