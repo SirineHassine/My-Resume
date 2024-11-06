@@ -1,6 +1,7 @@
 version: '3.8'
 services:
   myresumedb:
+    container_name: myresumedb
     build:
       context: ./db
       #image: sirinehassine/myresumedb
@@ -24,6 +25,10 @@ services:
       - "8080:8080"
     volumes:
       - myresumeappdata:/usr/local/tomcat/webapps
+    environment:
+      MYSQL_HOST: myresumedb
+      MYSQL_USER: root
+      MYSQL_PASSWORD: myresumepass
     depends_on:
       myresumedb:
         condition: service_healthy
