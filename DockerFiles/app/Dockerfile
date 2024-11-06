@@ -7,7 +7,7 @@ ENV TZ="Europe/Paris"
 
 RUN apt update && apt install maven -y
 RUN git clone https://github.com/SirineHassine/My-Resume.git
-RUN cd My-Resume && git checkout main && mvn install
+RUN cd My-Resume && git checkout main && mvn clean && mvn install
 
 FROM tomcat:9-jre11
 
