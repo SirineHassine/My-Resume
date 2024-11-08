@@ -47,6 +47,8 @@ services:
     build:
       context: ./web
       #image: sirinehassine/myresumeweb
+    environment:
+      APP_HOST: ${APP_HOST}
     depends_on: 
       myresumeapp:
             condition: service_healthy
