@@ -1,10 +1,5 @@
 FROM openjdk:11 AS BUILD_IMAGE
 
-ENV MYSQL_HOST="myresumedb"
-ENV MYSQL_USER="root"
-ENV MYSQL_PASSWORD="myresumepass"
-ENV TZ="Europe/Paris"
-
 RUN apt update && apt install maven -y
 RUN git clone https://github.com/SirineHassine/My-Resume.git
 RUN cd My-Resume && git checkout main && mvn clean && mvn install

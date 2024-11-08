@@ -10,10 +10,11 @@ services:
     volumes:
       - myresumedbdata:/var/lib/mysql
     environment:
-        MYSQL_ROOT_PASSWORD: myresumepass
-        TZ: Europe/Paris
+        MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+        MYSQL_DATABASE: ${MYSQL_DATABASE}		
+        TZ: ${TZ}
     healthcheck:
-      test: ["CMD", "mysql", "-u", "root", "-pmyresumepass", "--execute", "SHOW DATABASES;"]
+      test: ["CMD", "mysql", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}", "--execute", "SHOW DATABASES;"]
       interval: 10s
       retries: 5
       timeout: 5s
@@ -28,15 +29,15 @@ services:
     volumes:
       - myresumeappdata:/usr/local/tomcat/webapps
     environment:
-      MYSQL_HOST: myresumedb
-      MYSQL_USER: root
-      MYSQL_PASSWORD: myresumepass
-      TZ: Europe/Paris
+      MYSQL_HOST: ${MYSQL_HOST}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      TZ: ${TZ}
     depends_on:
       myresumedb:
         condition: service_healthy
     healthcheck:
-        test: ["CMD", "curl", "http://myresumeapp:8080"]
+        test: ["CMD", "curl", "http://${APP_HOST}:8080"]
         interval: 10s
         retries: 5
         timeout: 5s
