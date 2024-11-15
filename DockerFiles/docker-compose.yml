@@ -32,7 +32,15 @@ services:
       MYSQL_HOST: ${MYSQL_HOST}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-      TZ: ${TZ}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MAIL_HOST: ${MAIL_HOST}
+      MAIL_PORT: ${MAIL_PORT}
+      MAIL_USERNAME: ${MAIL_USERNAME}
+      MAIL_PASSWORD: ${MAIL_PASSWORD}
+      MAIL_PROTOCOL: ${MAIL_PROTOCOL}
+      MAIL_DEBUG: ${MAIL_DEBUG}
+      MAIL_TO: ${MAIL_TO}
+
     depends_on:
       myresumedb:
         condition: service_healthy
