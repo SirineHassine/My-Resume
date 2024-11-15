@@ -720,7 +720,7 @@
                                             </div>
                 
                                             <div class="col-sm-12">
-                                                <textarea name="message" class="contact-message" id="message" rows="6" placeholder="Your Message" required></textarea>
+                                                <textarea name="message" class="contact-message" id="message" rows="6" placeholder="Your Message" maxlength="250" required></textarea>
                                             </div>
                                             
                                             <!-- Subject Button -->
