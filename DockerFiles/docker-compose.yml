@@ -58,7 +58,6 @@ services:
     depends_on:
       myresumeapp:
             condition: service_healthy
-
     ports:
       - "80:80"
       - "443:443"
@@ -68,7 +67,11 @@ services:
       - myresumecertdata:/var/www/certbot/:ro
       - myresumecertconf:/etc/nginx/ssl/:ro
 
-    command: sh -c "sleep 30 && nginx -g 'daemon off;'"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost"]
+      interval: 10s
+      retries: 5
+      timeout: 3s
 
   certbot:
     image: certbot/certbot:latest
@@ -76,10 +79,11 @@ services:
     volumes:
       - myresumecertdata:/var/www/certbot
       - myresumecertconf:/etc/letsencrypt
-    entrypoint: ["/bin/sh", "-c", "trap exit TERM; while true; do sleep 2073600; done"]
-    command: certonly --webroot --webroot-path=/var/www/certbot --agree-tos --email sirine.hassine14@gmail.com -d sirine-hassine.fr
+        #entrypoint: ["/bin/sh", "-c", "trap exit TERM; while true; do sleep 2073600; done"]
+    command: certonly --webroot --webroot-path=/var/www/certbot --agree-tos --email sirine.hassine14@gmail.com -d www.sirine-hassine.fr
     depends_on:
-      - myresumeweb
+      myresumeweb:
+            condition: service_healthy
 
 volumes:
     myresumedbdata: {}
