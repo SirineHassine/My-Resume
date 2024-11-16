@@ -11,7 +11,7 @@ services:
       - myresumedbdata:/var/lib/mysql
     environment:
         MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-        MYSQL_DATABASE: ${MYSQL_DATABASE}		
+        MYSQL_DATABASE: ${MYSQL_DATABASE}
         TZ: ${TZ}
     healthcheck:
       test: ["CMD", "mysql", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}", "--execute", "SHOW DATABASES;"]
@@ -49,17 +49,43 @@ services:
         interval: 10s
         retries: 5
         timeout: 5s
-    
+
   myresumeweb:
     container_name: myresumeweb
     build:
       context: ./web
     image: sirinehassine/myresumeweb
-    depends_on: 
+    depends_on:
       myresumeapp:
             condition: service_healthy
+      certbot:
+            condition: service_completed_successfully
+
     ports:
       - "80:80"
+      - "443:443"
+    restart: always
+    volumes:
+      - myresumewebdata:/etc/nginx/conf.d/ #:ro
+      - myresumecertdata:/var/www/certbot/:ro
+      - myresumecertconf:/etc/nginx/ssl/:ro
+
+    command: sh -c "sleep 30 && nginx -g 'daemon off;'"
+
+  certbot:
+    image: certbot/certbot:latest
+    container_name: certbot
+    volumes:
+      - myresumecertdata:/var/www/certbot
+      - myresumecertconf:/etc/letsencrypt
+    entrypoint: ["/bin/sh", "-c", "trap exit TERM; while true; do sleep 2073600; done"]
+    command: certonly --webroot --webroot-path=/var/www/certbot --agree-tos --email sirine.hassine14@gmail.com -d sirine-hassine.fr
+    depends_on:
+      - myresumeweb
+
 volumes:
-  myresumedbdata: {}
-  myresumeappdata: {}
+    myresumedbdata: {}
+    myresumeappdata: {}
+    myresumewebdata: {}
+    myresumecertdata: {}
+    myresumecertconf: {}
