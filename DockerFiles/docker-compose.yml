@@ -58,8 +58,6 @@ services:
     depends_on:
       myresumeapp:
             condition: service_healthy
-      certbot:
-            condition: service_completed_successfully
 
     ports:
       - "80:80"
