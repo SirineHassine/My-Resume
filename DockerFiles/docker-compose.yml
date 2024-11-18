@@ -66,9 +66,11 @@ services:
       - myresumewebdata:/etc/nginx/conf.d/ #:ro
       - myresumecertdata:/var/www/certbot/:ro
       - myresumecertconf:/etc/nginx/ssl/:ro
+    environment:
+      ENABLE_SSL: ${ENABLE_SSL}
 
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost"]
+      test: ["CMD", "curl", "-f", "http://${APP_HOST}"]
       interval: 10s
       retries: 5
       timeout: 3s
@@ -79,8 +81,16 @@ services:
     volumes:
       - myresumecertdata:/var/www/certbot
       - myresumecertconf:/etc/letsencrypt
-        #entrypoint: ["/bin/sh", "-c", "trap exit TERM; while true; do sleep 2073600; done"]
-    command: certonly --webroot --webroot-path=/var/www/certbot --agree-tos --email sirine.hassine14@gmail.com -d www.sirine-hassine.fr
+    entrypoint: >
+         /bin/sh -c
+         "if [ \"$ENABLE_CERTBOT\" = \"true\" ]; then
+           certbot renew --webroot --webroot-path=/var/www/certbot --quiet || 
+           certbot certonly --webroot --webroot-path=/var/www/certbot --agree-tos --email sirine.hassine14@gmail.com -d www.sirine-hassine.fr;
+         else
+           echo 'Certbot disabled. Exiting.';
+           exit 0;
+         fi"
+    #command: certonly --webroot --webroot-path=/var/www/certbot --agree-tos --email sirine.hassine14@gmail.com -d www.sirine-hassine.fr
     depends_on:
       myresumeweb:
             condition: service_healthy
