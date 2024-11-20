@@ -67,9 +67,9 @@
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-core</artifactId>
-      <version>1.9.5</version>
+      <version>3.11.2</version>
       <scope>test</scope>
-    </dependency>
+    </dependency>	
 
     <!-- Spring Test for testing Spring applications -->
     <dependency>
@@ -121,13 +121,7 @@
       <version>1.2</version>
     </dependency>
 
-    <!-- Lombok for reducing boilerplate code in Java classes -->
-    <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-      <version>1.18.16</version>
-      <scope>provided</scope> <!-- Provided scope for compile-time only -->
-    </dependency>
+    
 
     <!-- Gson for JSON serialization and deserialization -->
     <dependency>

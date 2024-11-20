@@ -13,12 +13,11 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import fr.myresume.MainController;
 import fr.myresume.message.setup.StandaloneMvcTestViewResolver;
 import fr.myresume.service.MessageServices;
-import junit.framework.Assert;
+
 
 
 public class HomeControllerTest {
@@ -34,10 +33,12 @@ public class HomeControllerTest {
 		
 		/*InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setPrefix("/WEB-INF/views/");
-        viewResolver.setSuffix(".jsp");*/
-		
-		mockMvc = MockMvcBuilders.standaloneSetup(controller).setViewResolvers(new StandaloneMvcTestViewResolver()).build();
+        viewResolver.setSuffix(".jsp");
+		*/
+		mockMvc = MockMvcBuilders.standaloneSetup(controller)
+				  .setViewResolvers(new StandaloneMvcTestViewResolver()).build();
 	}
+	
 
 	
 	@Test
