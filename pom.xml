@@ -10,7 +10,7 @@
   <!-- Project's unique identifiers -->
   <groupId>fr.myresume</groupId> <!-- The group ID for the project -->
   <artifactId>SpringMVC-art</artifactId> <!-- The artifact ID for the project -->
-  <version>0.0.1-SNAPSHOT</version> <!-- Project version, with SNAPSHOT for in-progress development -->
+  <version>1.0.0</version> <!-- Project version, with SNAPSHOT for in-progress development -->
   <packaging>war</packaging> <!-- Specifies the packaging type, 'war' for a web application archive -->
 
   <!-- Project name and URL placeholder -->
