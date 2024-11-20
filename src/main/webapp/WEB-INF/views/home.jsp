@@ -3,7 +3,7 @@
 		
  <%@taglib prefix="c" uri="http://java.sun.com/jstl/core"%> 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="ISO-8859-1">
 <title>Sirine HASSINE - Resume </title>

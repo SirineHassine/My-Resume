@@ -60,7 +60,7 @@ public class EmailConfig
 	    props.put("mail.smtp.auth", auth);
 	    props.put("mail.smtp.starttls.enable", starttls);
 	    props.put("mail.debug", debug);
-
+	    
 	    return mailSender;
 	}
 
