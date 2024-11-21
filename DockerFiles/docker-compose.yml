@@ -4,7 +4,8 @@ services:
     container_name: myresumedb
     build:
       context: ./db
-    image: sirinehassine/myresumedb
+    #image: sirinehassine/myresumedb
+    image: 124355639478.dkr.ecr.us-east-2.amazonaws.com/myresumedb
     ports:
       - "3306:3306"
     volumes:
@@ -23,7 +24,8 @@ services:
     container_name: myresumeapp
     build:
       context: ./app
-    image: sirinehassine/myresumeapp
+    #image: sirinehassine/myresumeapp
+    image: 124355639478.dkr.ecr.us-east-2.amazonaws.com/myresumeapp
     ports:
       - "8080:8080"
     volumes:
@@ -54,7 +56,8 @@ services:
     container_name: myresumeweb
     build:
       context: ./web
-    image: sirinehassine/myresumeweb
+    #image: sirinehassine/myresumeweb
+    image: 124355639478.dkr.ecr.us-east-2.amazonaws.com/myresumeweb
     depends_on:
       myresumeapp:
             condition: service_healthy

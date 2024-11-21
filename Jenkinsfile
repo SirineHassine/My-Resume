@@ -13,24 +13,24 @@ pipeline {
 		NEXUS_REPO_ID    = "myresume-release"
         NEXUS_CREDENTIAL_ID = "NexusCreds"
         ARTVERSION = "${env.BUILD_ID}"
+        DOCKER_COMPOSE_FILE = "DockerFiles/docker-compose.yml" 
+        REGISTRY_CREDENTIAL="ecr:us-east-2:awscreds"
+        MYRESUME_REGISTRY="https://124355639478.dkr.ecr.us-east-2.amazonaws.com"
+        IMAGE_NAME="124355639478.dkr.ecr.us-east-2.amazonaws.com/myresumereappimg"
+   
     }
 	stages {
 
+		/*
 		stage ('Fetch code') {
 			steps{
 				git branch: 'develop', url: 'https://github.com/SirineHassine/My-Resume.git'
 			}
 			
-		}
+		}*/
 
-		stage ('Unit Test') {
-			steps{
-				sh 'mvn test'
-			}
-			
-		}
-
-		stage ('Build') {
+		
+	/*	stage ('Build') {
 			steps{
 				sh 'mvn install -DskipTests'
 			}
@@ -42,11 +42,27 @@ pipeline {
 			}
 			
 		}
+		
+		stage ('Unit Test') {
+			steps{
+				// Run Maven unit tests
+				sh 'mvn test'
+			}
+			
+		}
+
 
 		stage('Checkstyle Analysis')
 		{
 			steps{
+				// Run code analysis using Checkstyle plugin
 				sh 'mvn checkstyle:checkstyle'
+			}
+			post {
+                success {
+                    // Notify that Checkstyle analysis has been completed
+                    echo 'Generated Analysis Result'
+               }
 			}
 		}
 		
@@ -80,8 +96,7 @@ pipeline {
                 script {
                 	echo "starting"
                     pom = readMavenPom file: "pom.xml";
-                    pom = readMavenPom file: "pom.xml";
-                    echo pom
+                    
                     filesByGlob = findFiles(glob: "target/*.${pom.packaging}");
                     echo "${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
                     artifactPath = filesByGlob[0].path;
@@ -108,18 +123,53 @@ pipeline {
                             ]
                         );
                     } 
-		    else {
-                        error "*** File: ${artifactPath}, could not be found";
-                    }
-                }
-            }
+				    else {
+		                        error "*** File: ${artifactPath}, could not be found";
+		                    }
+		                }
+		            }
         }
 
 
-
-
-	}
-
-
-
+	*/
+	
+	
+	stage('Build Docker Images') {
+            steps {
+                script {
+                    // Exécution de la commande docker compose build avec le chemin correct
+		            sh "docker compose --env-file DockerFiles/.env.prod -f ${DOCKER_COMPOSE_FILE} build --build-arg BUILD_NUMBER=${BUILD_NUMBER}"
+		            
+		            // Récupérer toutes les images construites
+		            dockerImages = sh(script: "docker images --format '{{.Repository}}:{{.Tag}}'", returnStdout: true).trim().split('\n')
+		      }
+            }
+        }
+	
+	
+	
+	stage('Upload Image') {
+            steps {
+                script {
+                    // Connecter au registre et pousser les images
+                    docker.withRegistry(MYRESUME_REGISTRY, REGISTRY_CREDENTIAL) {
+                // Pousser chaque image construite
+                dockerImages.each { image ->
+                    echo "Pushing image: ${image}"
+                    docker.image(image).push("${BUILD_NUMBER}")
+                    docker.image(image).push("latest")
+                }
+            }
+                }
+            }
+    }
+    }
+	
+	post {
+        always {
+            echo 'Pipeline terminé.'
+        }
+    }
+	
+	
 }
