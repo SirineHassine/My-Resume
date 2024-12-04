@@ -10,7 +10,7 @@
   <!-- Project's unique identifiers -->
   <groupId>fr.myresume</groupId> <!-- The group ID for the project -->
   <artifactId>SpringMVC-art</artifactId> <!-- The artifact ID for the project -->
-  <version>0.0.1-SNAPSHOT</version> <!-- Project version, with SNAPSHOT for in-progress development -->
+  <version>1.0.0</version> <!-- Project version, with SNAPSHOT for in-progress development -->
   <packaging>war</packaging> <!-- Specifies the packaging type, 'war' for a web application archive -->
 
   <!-- Project name and URL placeholder -->
@@ -67,9 +67,9 @@
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-core</artifactId>
-      <version>1.9.5</version>
+      <version>3.11.2</version>
       <scope>test</scope>
-    </dependency>
+    </dependency>	
 
     <!-- Spring Test for testing Spring applications -->
     <dependency>
@@ -121,13 +121,7 @@
       <version>1.2</version>
     </dependency>
 
-    <!-- Lombok for reducing boilerplate code in Java classes -->
-    <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-      <version>1.18.16</version>
-      <scope>provided</scope> <!-- Provided scope for compile-time only -->
-    </dependency>
+    
 
     <!-- Gson for JSON serialization and deserialization -->
     <dependency>
